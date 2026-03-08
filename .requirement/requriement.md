@@ -2,73 +2,76 @@
 
 ## 1. Project Overview
 **App Name:** Goods Cheaper (Web Version)
-**URL Concept:** https://cheaper.myifew.com
-**Objective:** A responsive web application designed for quick price-per-unit comparisons. It allows shoppers to compare values on-the-go via mobile browsers or at home via desktop, with cloud-sync capabilities for registered users.
+**URL:** https://cheaper.myifew.com
+**Objective:** A responsive static web app for quick price-per-unit comparisons. No login required. Works on mobile and desktop.
 
 ---
 
 ## 2. Functional Requirements
 
-### 2.1 Comparison Dashboard (Responsive)
-The core interface must be fully responsive, adjusting its layout between Desktop (Side-by-side) and Mobile (Stacked) views.
+### 2.1 Comparison Dashboard
+- Two product cards **side-by-side** on all screen sizes (mobile + desktop).
+- **Field order:** Price → Quantity → Name (optional) → Discount
+- **Price:** Numeric input, no currency label (unitless).
+- **Quantity:** Numeric input. Placeholder hints: ชิ้น, กรัม, มล., กล่อง. No unit dropdown.
+- **Name:** Text input, optional.
+- **Discount:** Toggle between `%` (percent) and `ราคา` (flat cash), plus numeric input.
+- **Real-time result:** Unit price = (price after discount) ÷ quantity, shown in each card.
+- **Winner:** Lower unit price card gets green border + 🏆 badge.
+- **Price display:** 2 decimal places, no currency symbol.
 
-* **Dual-Input Interface:** Two distinct sections for **Product A** and **Product B**.
-* **Input Parameters:**
-    * **Product/Brand Name (Optional):** Text input.
-    * **Price:** Numerical input with support for decimal points.
-    * **Quantity/Volume:** Numerical input.
-    * **Unit Selector:** Dropdown menu (Pcs, Pack, ml, Liter, Gram, Kilogram, etc.).
-* **Advanced Discount Logic:**
-    * **Toggle Switch:** Choose between **Percentage (%)** or **Flat Rate (Cash)**.
-    * **Calculation:** Automatic deduction from the total price before calculating the unit price.
-* **Real-time Results:**
-    * **Dynamic Highlight:** The "Cheaper" item is immediately highlighted with a "Winner" badge or green glow.
-    * **Price Difference:** Show exactly how much (in % or currency) the user saves by picking the cheaper option.
+### 2.2 No Authentication
+- No sign in / sign up.
+- All data stored in browser `localStorage`.
 
-### 2.2 User Authentication & Cloud Sync
-* **Web SSO (Single Sign-On):** * Login via **Google (Gmail)**.
-    * Login via **Facebook**.
-* **Session Management:** "Remember Me" functionality to keep users logged in across browser sessions.
-* **Guest Access:** Fully functional calculator for non-registered users (Local session only).
+### 2.3 History
+- Save comparison to `localStorage` via "Save comparison" button (shown after result).
+- History page (`history.html`) lists saved comparisons with winner, unit prices, date.
+- Delete individual entries or clear all.
 
-### 2.3 Comparison History & Data Management
-* **Personal Archive:** A dedicated "History" page for logged-in users.
-* **Search & Filter:** Users can search through their history by product name or date.
-* **Export Data:** Ability to export comparison history to **CSV or PDF** (Exclusive to Web version).
-
-### 2.4 Localization & Global Settings
-* **Multi-Language Support (13 Languages):** * English, Thai, Chinese (Traditional/Simplified), French, Russian, German, Spanish, Vietnamese, Japanese, Arabic, Hindi, Kazakh.
-* **Currency/Unit Localization:** Ability to set default currency and preferred unit systems (Metric/Imperial).
+### 2.4 Language
+- 13 languages: Thai, English, Traditional Chinese, Simplified Chinese, French, Russian, German, Spanish, Vietnamese, Japanese, Arabic, Hindi, Kazakh.
+- Language selector in header (dropdown).
+- Selected language stored in `localStorage`.
+- No URL-based routing for locale.
 
 ---
 
-## 3. Technical & Performance Requirements
+## 3. Technical Requirements
 
 | Feature | Specification |
 | :--- | :--- |
-| **Framework** | React.js, Next.js, or Vue.js (for high performance). |
-| **Responsiveness** | Mobile-first Design (PWA - Progressive Web App support recommended). |
-| **Database** | Supabase (Real-time data syncing). |
-| **SEO** | Basic SEO optimization for the landing page to drive organic traffic. |
-| **Security** | HTTPS encryption and secure OAuth 2.0 protocols. |
-| **Host** | Vercel |
+| **Stack** | Plain HTML + Vanilla JS + Tailwind CSS (CDN) |
+| **No framework** | No Next.js, no React, no TypeScript |
+| **Storage** | localStorage only |
+| **Auth** | None |
+| **Host** | Vercel (static, no build step) |
+| **Performance** | Result < 100ms on every input change |
 
 ---
 
-## 4. User Interface (UI) Layout Concept
+## 4. UI Layout
 
-### Desktop View
-- **Header:** Logo (Goods Cheaper), Language Selector, Profile/Login.
-- **Main:** Two large cards side-by-side (Item A | Item B).
-- **Footer:** History Preview and Settings.
+### All screen sizes
+- **Header:** 🛒 Goods Cheaper logo · Nav links (Compare / History) · Language dropdown
+- **Main:** Two cards side by side
+- **Mobile bottom nav:** ⚖️ Compare · 📋 History (fixed bottom, hidden on lg+)
 
-### Mobile Web View
-- **Main:** Stacked cards (Item A on top, Item B below).
-- **Bottom Navigation:** Quick links to "Compare", "History", and "Settings".
+### Card layout (both cards identical)
+```
+[ ราคา (ตัวเลข)                    ]
+[ ปริมาณ เช่น ชิ้น, กรัม, มล.     ]
+[ ชื่อสินค้า (ไม่บังคับ)            ]
+[ % | ราคา ][ ส่วนลด               ]
+[ ผลลัพธ์: X.XX ต่อหน่วย           ]  ← shows after both cards have valid input
+```
 
 ---
 
-## 5. Success Metrics
-* **Calculation Speed:** Result should appear within < 100ms of input change.
-* **User Retention:** Percentage of users who return and log in to save history.
-* **Conversion:** Increase in "Sign-ups" compared to "Guest sessions."
+## 5. Out of Scope (removed from original PRD)
+- User authentication (Google/Facebook OAuth)
+- Cloud sync / Supabase
+- Settings page (currency, unit system)
+- Export CSV/PDF
+- Unit selector dropdown (g, ml, pcs, etc.)
+- URL-based locale routing
