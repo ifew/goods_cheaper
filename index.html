@@ -66,12 +66,16 @@
         <input id="price-a" type="number" inputmode="decimal" min="0" class="inp" data-ph="pricePh">
         <input id="qty-a"   type="number" inputmode="decimal" min="0" class="inp" data-ph="qtyPh">
         <input id="name-a"  type="text"                               class="inp" data-ph="namePh">
-        <div class="flex gap-1.5">
-          <div class="flex rounded-xl border border-gray-200 overflow-hidden text-xs flex-shrink-0">
-            <button id="pct-a"  onclick="setDisc('a','percent')" class="disc-btn-on  px-2.5 py-2">%</button>
-            <button id="flat-a" onclick="setDisc('a','flat')"    class="disc-btn-off px-2.5 py-2" data-i18n="discPrice"></button>
+        <div>
+          <p class="text-xs text-gray-400 mb-1" data-i18n="discount"></p>
+          <div class="flex gap-1.5">
+            <div class="flex rounded-xl border border-gray-200 overflow-hidden text-xs flex-shrink-0">
+              <button id="pct-a"  onclick="setDisc('a','percent')" class="disc-btn-on  px-2.5 py-2">%</button>
+              <button id="flat-a" onclick="setDisc('a','flat')"    class="disc-btn-off px-2.5 py-2" data-i18n="discPrice"></button>
+            </div>
+            <input id="dval-a" type="number" inputmode="decimal" min="0" placeholder="0"
+              class="flex-1 min-w-0 border border-gray-200 rounded-xl px-2.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-50">
           </div>
-          <input id="dval-a" type="number" inputmode="decimal" min="0" placeholder="0" class="inp flex-1 min-w-0">
         </div>
         <div id="res-a" class="hidden text-center p-2 rounded-xl bg-gray-100">
           <p id="up-a"  class="text-base font-bold tabular-nums text-gray-700"></p>
@@ -90,12 +94,16 @@
         <input id="price-b" type="number" inputmode="decimal" min="0" class="inp" data-ph="pricePh">
         <input id="qty-b"   type="number" inputmode="decimal" min="0" class="inp" data-ph="qtyPh">
         <input id="name-b"  type="text"                               class="inp" data-ph="namePh">
-        <div class="flex gap-1.5">
-          <div class="flex rounded-xl border border-gray-200 overflow-hidden text-xs flex-shrink-0">
-            <button id="pct-b"  onclick="setDisc('b','percent')" class="disc-btn-on  px-2.5 py-2">%</button>
-            <button id="flat-b" onclick="setDisc('b','flat')"    class="disc-btn-off px-2.5 py-2" data-i18n="discPrice"></button>
+        <div>
+          <p class="text-xs text-gray-400 mb-1" data-i18n="discount"></p>
+          <div class="flex gap-1.5">
+            <div class="flex rounded-xl border border-gray-200 overflow-hidden text-xs flex-shrink-0">
+              <button id="pct-b"  onclick="setDisc('b','percent')" class="disc-btn-on  px-2.5 py-2">%</button>
+              <button id="flat-b" onclick="setDisc('b','flat')"    class="disc-btn-off px-2.5 py-2" data-i18n="discPrice"></button>
+            </div>
+            <input id="dval-b" type="number" inputmode="decimal" min="0" placeholder="0"
+              class="flex-1 min-w-0 border border-gray-200 rounded-xl px-2.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-50">
           </div>
-          <input id="dval-b" type="number" inputmode="decimal" min="0" placeholder="0" class="inp flex-1 min-w-0">
         </div>
         <div id="res-b" class="hidden text-center p-2 rounded-xl bg-gray-100">
           <p id="up-b"  class="text-base font-bold tabular-nums text-gray-700"></p>
@@ -170,7 +178,7 @@ const LANG = {
     title:'เปรียบเทียบราคา', compare:'เปรียบเทียบ', history:'ประวัติ',
     productA:'สินค้า A', productB:'สินค้า B',
     pricePh:'ราคา (ตัวเลข)', qtyPh:'ปริมาณ เช่น ชิ้น, กรัม, มล., กล่อง',
-    namePh:'ชื่อสินค้า (ไม่บังคับ)', discPrice:'ราคา', perUnit:'ต่อหน่วย',
+    namePh:'ชื่อสินค้า (ไม่บังคับ)', discPrice:'ราคา', perUnit:'ต่อหน่วย', discount:'ส่วนลด',
     tieText:'ราคาต่อหน่วยเท่ากัน',
     winnerText:'{name} ถูกกว่า', savePct:'ประหยัด {pct}%',
     saveCash:'ประหยัด {amount} ต่อหน่วย',
@@ -180,7 +188,7 @@ const LANG = {
     title:'Price Comparison', compare:'Compare', history:'History',
     productA:'Product A', productB:'Product B',
     pricePh:'Price (number)', qtyPh:'Qty e.g. pcs, g, ml, box',
-    namePh:'Product name (optional)', discPrice:'Price', perUnit:'per unit',
+    namePh:'Product name (optional)', discPrice:'Price', perUnit:'per unit', discount:'Discount',
     tieText:'Same price per unit',
     winnerText:'{name} is cheaper', savePct:'Save {pct}%',
     saveCash:'Save {amount} per unit',
