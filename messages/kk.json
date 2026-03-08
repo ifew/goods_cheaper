@@ -1,0 +1,48 @@
+{
+  "app": { "name": "Goods Cheaper", "tagline": "Бағаларды ақылды салыстырыңыз" },
+  "nav": { "compare": "Салыстыру", "history": "Тарих", "settings": "Параметрлер" },
+  "compare": {
+    "title": "Баға салыстыру", "productA": "Тауар A", "productB": "Тауар B",
+    "productName": "Тауар / бренд атауы (міндетті емес)", "price": "Баға", "quantity": "Саны",
+    "unit": "Бірлік", "discount": "Жеңілдік", "discountPercent": "Пайыз (%)",
+    "discountFlat": "Тұрақты сома", "discountValue": "Жеңілдік мөлшері",
+    "save": "Салыстыруды сақтау", "reset": "Қалпына келтіру",
+    "errors": {
+      "unitMismatch": "Әртүрлі бірлік түрлерін салыстыруға болмайды (мысалы, салмақ пен көлем).",
+      "invalidInput": "Екі тауарға да жарамды баға мен санды енгізіңіз."
+    }
+  },
+  "result": {
+    "cheaper": "Арзанырақ!", "tie": "Бірлік бағасы бірдей",
+    "winner": "{name} арзанырақ", "savingsPercent": "{pct}% үнемдеу",
+    "savingsCash": "{unit} үшін {amount} үнемдеу", "pricePerUnit": "{price} / {unit}"
+  },
+  "history": {
+    "title": "Тарих", "empty": "Сақталған салыстырулар жоқ.",
+    "loginPrompt": "Тарихты сақтау үшін кіріңіз.", "search": "Тауар атауы бойынша іздеу",
+    "exportCsv": "CSV экспорт", "exportPdf": "PDF экспорт", "delete": "Жою",
+    "winner": "Жеңімпаз: {name}", "noWinner": "Тең"
+  },
+  "settings": {
+    "title": "Параметрлер", "language": "Тіл", "currency": "Валюта",
+    "unitSystem": "Өлшем жүйесі", "metric": "Метрлік", "imperial": "Империялық",
+    "save": "Параметрлерді сақтау", "saved": "Сақталды!"
+  },
+  "auth": {
+    "signIn": "Кіру", "signOut": "Шығу",
+    "signInGoogle": "Google арқылы кіру", "signInFacebook": "Facebook арқылы кіру",
+    "profile": "Профиль", "guest": "Қонақ"
+  },
+  "units": {
+    "ml": "мл", "cl": "сл", "dl": "дл", "l": "л",
+    "fl oz": "сұй. унция", "pint": "пинта", "gallon": "галлон",
+    "g": "г", "kg": "кг", "oz": "унция", "lb": "фунт",
+    "pcs": "дана", "pack": "қап", "dozen": "жиырма"
+  },
+  "currencies": {
+    "THB": "Тай баты (฿)", "USD": "АҚШ доллары ($)", "EUR": "Еуро (€)",
+    "GBP": "Фунт стерлинг (£)", "JPY": "Жапон иенасы (¥)", "CNY": "Қытай юані (¥)",
+    "KRW": "Корей воны (₩)", "VND": "Вьетнам донгі (₫)", "INR": "Үнді рупиясы (₹)",
+    "RUB": "Ресей рублі (₽)", "KZT": "Қазақстан теңгесі (₸)"
+  }
+}

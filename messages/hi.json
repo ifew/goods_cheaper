@@ -1,0 +1,48 @@
+{
+  "app": { "name": "Goods Cheaper", "tagline": "कीमतें बुद्धिमानी से तुलना करें" },
+  "nav": { "compare": "तुलना करें", "history": "इतिहास", "settings": "सेटिंग्स" },
+  "compare": {
+    "title": "मूल्य तुलना", "productA": "उत्पाद A", "productB": "उत्पाद B",
+    "productName": "उत्पाद / ब्रांड नाम (वैकल्पिक)", "price": "मूल्य", "quantity": "मात्रा",
+    "unit": "इकाई", "discount": "छूट", "discountPercent": "प्रतिशत (%)",
+    "discountFlat": "निश्चित राशि", "discountValue": "छूट मूल्य",
+    "save": "तुलना सहेजें", "reset": "रीसेट करें",
+    "errors": {
+      "unitMismatch": "विभिन्न इकाई प्रकारों की तुलना नहीं की जा सकती (जैसे वजन बनाम आयतन)।",
+      "invalidInput": "कृपया दोनों उत्पादों के लिए वैध मूल्य और मात्रा दर्ज करें।"
+    }
+  },
+  "result": {
+    "cheaper": "सस्ता!", "tie": "प्रति इकाई समान मूल्य",
+    "winner": "{name} सस्ता है", "savingsPercent": "{pct}% बचाएं",
+    "savingsCash": "प्रति {unit} {amount} बचाएं", "pricePerUnit": "{price} / {unit}"
+  },
+  "history": {
+    "title": "इतिहास", "empty": "अभी तक कोई तुलना सहेजी नहीं गई।",
+    "loginPrompt": "इतिहास सहेजने और देखने के लिए साइन इन करें।", "search": "उत्पाद नाम से खोजें",
+    "exportCsv": "CSV निर्यात", "exportPdf": "PDF निर्यात", "delete": "हटाएं",
+    "winner": "विजेता: {name}", "noWinner": "बराबरी"
+  },
+  "settings": {
+    "title": "सेटिंग्स", "language": "भाषा", "currency": "मुद्रा",
+    "unitSystem": "इकाई प्रणाली", "metric": "मीट्रिक", "imperial": "शाही",
+    "save": "सेटिंग्स सहेजें", "saved": "सहेजा गया!"
+  },
+  "auth": {
+    "signIn": "साइन इन करें", "signOut": "साइन आउट करें",
+    "signInGoogle": "Google से साइन इन करें", "signInFacebook": "Facebook से साइन इन करें",
+    "profile": "प्रोफ़ाइल", "guest": "अतिथि"
+  },
+  "units": {
+    "ml": "मिली", "cl": "सेमिली", "dl": "डेसिली", "l": "लीटर",
+    "fl oz": "फ्लूइड औंस", "pint": "पिंट", "gallon": "गैलन",
+    "g": "ग्राम", "kg": "किग्रा", "oz": "औंस", "lb": "पाउंड",
+    "pcs": "नग", "pack": "पैक", "dozen": "दर्जन"
+  },
+  "currencies": {
+    "THB": "थाई बात (฿)", "USD": "अमेरिकी डॉलर ($)", "EUR": "यूरो (€)",
+    "GBP": "पाउंड स्टर्लिंग (£)", "JPY": "जापानी येन (¥)", "CNY": "चीनी युआन (¥)",
+    "KRW": "कोरियाई वोन (₩)", "VND": "वियतनामी डोंग (₫)", "INR": "भारतीय रुपया (₹)",
+    "RUB": "रूसी रूबल (₽)", "KZT": "कज़ाख तेंगे (₸)"
+  }
+}
