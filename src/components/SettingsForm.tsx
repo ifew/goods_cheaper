@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter, usePathname } from '@/i18n/navigation';
 import { locales } from '@/i18n/routing';
 import { createClient } from '@/lib/supabase/client';
 import { useComparisonStore } from '@/stores/comparisonStore';
@@ -24,8 +23,6 @@ interface Props {
 export default function SettingsForm({ profile, userId }: Props) {
   const t     = useTranslations('settings');
   const tCurr = useTranslations('currencies');
-  const router    = useRouter();
-  const pathname  = usePathname();
   const setCurrency = useComparisonStore((s) => s.setCurrency);
 
   const [lang,    setLang]    = useState(profile?.language ?? 'en');
@@ -42,7 +39,11 @@ export default function SettingsForm({ profile, userId }: Props) {
         unit_system: unitSys, updated_at: new Date().toISOString(),
       });
     }
-    router.replace(pathname, { locale: lang });
+    // Persist preference and navigate
+    document.cookie = `NEXT_LOCALE=${lang};path=/;max-age=31536000`;
+    const parts = window.location.pathname.split('/');
+    parts[1] = lang;
+    window.location.href = parts.join('/');
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

@@ -20,6 +20,9 @@
     "discountPercent": "Percent (%)",
     "discountFlat": "Flat (Cash)",
     "discountValue": "Discount value",
+    "pricePlaceholder": "Price (number)",
+    "quantityPlaceholder": "Qty e.g. pcs, g, ml, box",
+    "discountPrice": "Price",
     "save": "Save comparison",
     "reset": "Reset",
     "errors": {
@@ -33,7 +36,8 @@
     "winner": "{name} is cheaper",
     "savingsPercent": "Save {pct}%",
     "savingsCash": "Save {amount} per {unit}",
-    "pricePerUnit": "{price} / {unit}"
+    "pricePerUnit": "{price} / {unit}",
+    "perUnit": "per unit"
   },
   "history": {
     "title": "History",

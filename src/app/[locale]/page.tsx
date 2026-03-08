@@ -15,9 +15,9 @@ export default function ComparePage() {
         <ResetButton />
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-5">
+      <div className="flex flex-row gap-2 sm:gap-5">
         <ProductCard product="A" />
-        <div className="hidden lg:flex items-center justify-center text-3xl text-gray-300 font-bold px-2">
+        <div className="hidden sm:flex items-center justify-center text-3xl text-gray-300 font-bold px-2 flex-shrink-0">
           VS
         </div>
         <ProductCard product="B" />

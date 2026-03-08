@@ -11,4 +11,5 @@ export type AppLocale = (typeof locales)[number];
 export const routing = defineRouting({
   locales,
   defaultLocale: 'en',
+  localeDetection: false, // rely on URL prefix only, not Accept-Language header
 });

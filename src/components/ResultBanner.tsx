@@ -59,7 +59,7 @@ export default function ResultBanner() {
               {t('result.savingsPercent', { pct: result.savingsPercent.toFixed(1) })}
               {' · '}
               {t('result.savingsCash', {
-                amount: `${currency} ${result.savingsCash.toFixed(4)}`,
+                amount: result.savingsCash.toFixed(2),
                 unit: result.baseUnit,
               })}
             </p>
@@ -77,7 +77,7 @@ export default function ResultBanner() {
             <div key={p} className={`rounded-xl p-3 text-center ${winner ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}`}>
               <p className="font-medium text-gray-700 truncate">{name}</p>
               <p className={`font-bold tabular-nums ${winner ? 'text-green-600' : 'text-gray-500'}`}>
-                {currency} {price.toFixed(4)}<span className="text-xs font-normal">/{result.baseUnit}</span>
+                {price.toFixed(2)}<span className="text-xs font-normal">/{result.baseUnit}</span>
               </p>
             </div>
           );

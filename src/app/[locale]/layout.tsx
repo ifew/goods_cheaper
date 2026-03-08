@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
@@ -22,12 +22,13 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!routing.locales.includes(locale as never)) notFound();
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body className="bg-gray-50 min-h-screen">
+      <body className="bg-gray-50 min-h-screen" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="pb-16 lg:pb-0">{children}</main>

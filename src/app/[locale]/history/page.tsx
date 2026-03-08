@@ -1,9 +1,15 @@
 import { createClient } from '@/lib/supabase/server';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import HistoryList from '@/components/HistoryList';
 import type { SavedComparison } from '@/types';
 
-export default async function HistoryPage() {
+export default async function HistoryPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations('history');
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

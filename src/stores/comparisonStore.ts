@@ -6,7 +6,7 @@ const defaultProduct = (): ProductInput => ({
   name: '',
   price: '',
   quantity: '',
-  unit: 'g',
+  unit: 'pcs',
   discountType: 'percent',
   discountValue: '0',
 });

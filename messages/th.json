@@ -20,6 +20,9 @@
     "discountPercent": "เปอร์เซ็นต์ (%)",
     "discountFlat": "ลดคงที่ (บาท)",
     "discountValue": "มูลค่าส่วนลด",
+    "pricePlaceholder": "ราคา (ตัวเลข)",
+    "quantityPlaceholder": "ปริมาณ เช่น ชิ้น, กรัม, มล., กล่อง",
+    "discountPrice": "ราคา",
     "save": "บันทึกการเปรียบเทียบ",
     "reset": "รีเซ็ต",
     "errors": {
@@ -33,7 +36,8 @@
     "winner": "{name} ถูกกว่า",
     "savingsPercent": "ประหยัด {pct}%",
     "savingsCash": "ประหยัด {amount} ต่อ {unit}",
-    "pricePerUnit": "{price} / {unit}"
+    "pricePerUnit": "{price} / {unit}",
+    "perUnit": "ต่อหน่วย"
   },
   "history": {
     "title": "ประวัติการเปรียบเทียบ",

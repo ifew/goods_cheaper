@@ -1,9 +1,15 @@
 import { createClient } from '@/lib/supabase/server';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import SettingsForm from '@/components/SettingsForm';
 import type { UserProfile } from '@/types';
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations('settings');
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

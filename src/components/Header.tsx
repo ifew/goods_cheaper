@@ -1,8 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useRouter, usePathname, Link } from '@/i18n/navigation';
-import { locales } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
+import { locales, type AppLocale } from '@/i18n/routing';
 import AuthButton from './AuthButton';
 
 const LOCALE_NAMES: Record<string, string> = {
@@ -16,15 +17,22 @@ const LOCALE_NAMES: Record<string, string> = {
 export default function Header() {
   const t = useTranslations();
   const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
+  const [pending, setPending] = useState<AppLocale | null>(null);
+
+  function handleLocaleChange(newLocale: AppLocale) {
+    setPending(newLocale);
+    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
+    const parts = window.location.pathname.split('/');
+    parts[1] = newLocale;
+    window.location.href = parts.join('/');
+  }
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
       <div className="container mx-auto px-4 h-14 flex items-center justify-between max-w-5xl">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl">🛒</span>
-          <span className="font-bold text-green-600 text-lg hidden sm:block">{t('app.name')}</span>
+          <span className="font-bold text-green-600 text-lg">{t('app.name')}</span>
         </Link>
 
         {/* Desktop nav */}
@@ -36,8 +44,8 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <select
-            value={locale}
-            onChange={(e) => router.replace(pathname, { locale: e.target.value })}
+            value={pending ?? locale}
+            onChange={(e) => handleLocaleChange(e.target.value as AppLocale)}
             className="text-sm border border-gray-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
           >
             {locales.map((l) => (
