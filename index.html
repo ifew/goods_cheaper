@@ -114,6 +114,12 @@
 
   </div><!-- end cards row -->
 
+  <!-- Tips (shown by default, hidden when result is ready) -->
+  <div id="tips" class="mt-4 bg-amber-50 border border-amber-200 rounded-2xl p-4">
+    <p class="text-sm font-semibold text-amber-700 mb-2" data-i18n="tipsTitle"></p>
+    <p class="text-sm text-amber-800 leading-relaxed" data-i18n="tipsBody"></p>
+  </div>
+
   <!-- Result Banner -->
   <div id="banner" class="hidden mt-4 bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
     <div class="text-center mb-3">
@@ -193,6 +199,8 @@ const LANG = {
     winnerText:'{name} ถูกกว่า', savePct:'ประหยัด {pct}%',
     saveCash:'ประหยัด {amount} ต่อหน่วย',
     save:'บันทึกการเปรียบเทียบ', reset:'↺ รีเซ็ต', saveOk:'บันทึกแล้ว ✓',
+    tipsTitle:'💡 เคล็ดลับ: กรอกหน่วยย่อยที่สุดเพื่อเทียบราคาให้แม่นยำ',
+    tipsBody:'ตัวอย่าง: ยาสีฟัน 1 กล่องมี 3 หลอด ราคา 356 บาท เทียบกับ ยาสีฟัน 2 หลอด ราคา 234 บาท — ควรกรอก ราคา และ จำนวนหลอด ไม่ใช่จำนวนกล่อง (ถ้าเทียบกล่องก็รู้อยู่แล้วว่าอะไรถูกกว่า 555 😄)',
   },
   en: {
     title:'Price Comparison', compare:'Compare', history:'History',
@@ -203,6 +211,8 @@ const LANG = {
     winnerText:'{name} is cheaper', savePct:'Save {pct}%',
     saveCash:'Save {amount} per unit',
     save:'Save comparison', reset:'↺ Reset', saveOk:'Saved ✓',
+    tipsTitle:'💡 Tip: Use the smallest unit for accurate price comparison',
+    tipsBody:'Example: Toothpaste 1 box (3 tubes) at 356 THB vs 2 tubes at 234 THB — enter the price and number of tubes, not boxes. (If you compare by box you already know which is cheaper, lol 😄)',
   },
   'zh-TW': {
     title:'價格比較', compare:'比較', history:'歷史',
@@ -373,6 +383,7 @@ function render() {
   });
 
   document.getElementById('banner').classList.add('hidden');
+  document.getElementById('tips').classList.remove('hidden');
 
   if (!r) return;
 
@@ -402,6 +413,7 @@ function render() {
   const wnName = r.winner === 'a' ? nameA : r.winner === 'b' ? nameB : null;
 
   document.getElementById('banner').classList.remove('hidden');
+  document.getElementById('tips').classList.add('hidden');
 
   if (r.winner === 'tie') {
     document.getElementById('b-emoji').textContent = '🤝';
