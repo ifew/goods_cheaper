@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History – Goods Cheaper</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Header -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+  <div class="container mx-auto px-3 h-12 flex items-center justify-between max-w-2xl">
+    <a href="index.html" class="flex items-center gap-1.5">
+      <span class="text-xl">🛒</span>
+      <span class="font-bold text-green-600 text-base">Goods Cheaper</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <nav class="hidden sm:flex items-center gap-4 text-sm font-medium text-gray-500 mr-1">
+        <a href="index.html"  class="hover:text-green-600 transition-colors" data-i18n="compare"></a>
+        <a href="history.html" class="text-green-600 font-semibold"           data-i18n="history"></a>
+      </nav>
+      <select id="lang-select" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-green-400">
+        <option value="th">ไทย</option>
+        <option value="en">English</option>
+        <option value="zh-TW">繁中</option>
+        <option value="zh-CN">简中</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="vi">Tiếng Việt</option>
+        <option value="ja">日本語</option>
+        <option value="ar">العربية</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kk">Қазақша</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="container mx-auto px-3 py-4 max-w-2xl pb-20 lg:pb-6">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-lg font-bold text-gray-800" data-i18n="historyTitle"></h1>
+    <button id="clear-btn" class="text-sm text-red-400 hover:text-red-600 font-medium transition-colors" data-i18n="clearAll"></button>
+  </div>
+  <div id="list"></div>
+</main>
+
+<!-- Bottom nav -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-20 flex">
+  <a href="index.html" class="flex-1 flex flex-col items-center py-2 text-gray-400 hover:text-gray-600 transition-colors">
+    <span class="text-xl">⚖️</span>
+    <span class="text-xs font-medium" data-i18n="compare"></span>
+  </a>
+  <a href="history.html" class="flex-1 flex flex-col items-center py-2 text-green-600">
+    <span class="text-xl">📋</span>
+    <span class="text-xs font-medium" data-i18n="history"></span>
+  </a>
+</nav>
+
+<script>
+// ── Translations (same set as index.html) ─────────────────────────────────────
+const LANG = {
+  th: {
+    compare:'เปรียบเทียบ', history:'ประวัติ', historyTitle:'ประวัติการเปรียบเทียบ',
+    productA:'สินค้า A', productB:'สินค้า B', perUnit:'ต่อหน่วย',
+    noHistory:'ยังไม่มีการเปรียบเทียบที่บันทึกไว้', delete:'ลบ', clearAll:'ลบทั้งหมด',
+    winnerLabel:'{name} ถูกกว่า', tieLabel:'ราคาเท่ากัน',
+  },
+  en: {
+    compare:'Compare', history:'History', historyTitle:'Comparison History',
+    productA:'Product A', productB:'Product B', perUnit:'per unit',
+    noHistory:'No saved comparisons yet.', delete:'Delete', clearAll:'Clear All',
+    winnerLabel:'{name} is cheaper', tieLabel:'Same price',
+  },
+  'zh-TW': {
+    compare:'比較', history:'歷史', historyTitle:'比較歷史',
+    productA:'商品 A', productB:'商品 B', perUnit:'每單位',
+    noHistory:'尚無儲存的比較。', delete:'刪除', clearAll:'清除全部',
+    winnerLabel:'{name} 較便宜', tieLabel:'相同價格',
+  },
+  'zh-CN': {
+    compare:'比较', history:'历史', historyTitle:'比较历史',
+    productA:'商品 A', productB:'商品 B', perUnit:'每单位',
+    noHistory:'尚无保存的比较。', delete:'删除', clearAll:'清除全部',
+    winnerLabel:'{name} 更便宜', tieLabel:'价格相同',
+  },
+  fr: {
+    compare:'Comparer', history:'Historique', historyTitle:'Historique des comparaisons',
+    productA:'Produit A', productB:'Produit B', perUnit:'par unité',
+    noHistory:'Aucune comparaison sauvegardée.', delete:'Supprimer', clearAll:'Tout effacer',
+    winnerLabel:'{name} est moins cher', tieLabel:'Même prix',
+  },
+  ru: {
+    compare:'Сравнить', history:'История', historyTitle:'История сравнений',
+    productA:'Товар A', productB:'Товар B', perUnit:'за ед.',
+    noHistory:'Нет сохранённых сравнений.', delete:'Удалить', clearAll:'Очистить всё',
+    winnerLabel:'{name} дешевле', tieLabel:'Одинаковая цена',
+  },
+  de: {
+    compare:'Vergleichen', history:'Verlauf', historyTitle:'Vergleichsverlauf',
+    productA:'Produkt A', productB:'Produkt B', perUnit:'pro Einheit',
+    noHistory:'Keine gespeicherten Vergleiche.', delete:'Löschen', clearAll:'Alle löschen',
+    winnerLabel:'{name} ist günstiger', tieLabel:'Gleicher Preis',
+  },
+  es: {
+    compare:'Comparar', history:'Historial', historyTitle:'Historial de comparaciones',
+    productA:'Producto A', productB:'Producto B', perUnit:'por unidad',
+    noHistory:'No hay comparaciones guardadas.', delete:'Eliminar', clearAll:'Borrar todo',
+    winnerLabel:'{name} es más barato', tieLabel:'Mismo precio',
+  },
+  vi: {
+    compare:'So sánh', history:'Lịch sử', historyTitle:'Lịch sử so sánh',
+    productA:'Sản phẩm A', productB:'Sản phẩm B', perUnit:'mỗi đơn vị',
+    noHistory:'Chưa có so sánh nào được lưu.', delete:'Xóa', clearAll:'Xóa tất cả',
+    winnerLabel:'{name} rẻ hơn', tieLabel:'Giá bằng nhau',
+  },
+  ja: {
+    compare:'比較', history:'履歴', historyTitle:'比較履歴',
+    productA:'商品 A', productB:'商品 B', perUnit:'単位あたり',
+    noHistory:'保存された比較はありません。', delete:'削除', clearAll:'すべて削除',
+    winnerLabel:'{name}が安い', tieLabel:'同じ価格',
+  },
+  ar: {
+    compare:'مقارنة', history:'السجل', historyTitle:'سجل المقارنات',
+    productA:'المنتج أ', productB:'المنتج ب', perUnit:'لكل وحدة',
+    noHistory:'لا توجد مقارنات محفوظة.', delete:'حذف', clearAll:'مسح الكل',
+    winnerLabel:'{name} أرخص', tieLabel:'نفس السعر',
+  },
+  hi: {
+    compare:'तुलना', history:'इतिहास', historyTitle:'तुलना इतिहास',
+    productA:'उत्पाद A', productB:'उत्पाद B', perUnit:'प्रति इकाई',
+    noHistory:'कोई सहेजी गई तुलना नहीं।', delete:'हटाएं', clearAll:'सब हटाएं',
+    winnerLabel:'{name} सस्ता है', tieLabel:'समान मूल्य',
+  },
+  kk: {
+    compare:'Салыстыру', history:'Тарих', historyTitle:'Салыстыру тарихы',
+    productA:'Тауар A', productB:'Тауар B', perUnit:'бірлік үшін',
+    noHistory:'Сақталған салыстырулар жоқ.', delete:'Жою', clearAll:'Барлығын жою',
+    winnerLabel:'{name} арзанырақ', tieLabel:'Бір бағалы',
+  },
+};
+
+let locale = localStorage.getItem('locale') || 'th';
+const t = (k, v={}) => {
+  let s = (LANG[locale]||LANG.en)[k] || k;
+  Object.entries(v).forEach(([a,b]) => s = s.replace(`{${a}}`, b));
+  return s;
+};
+
+// ── Render history list ───────────────────────────────────────────────────────
+function renderList() {
+  const list = document.getElementById('list');
+  const hist = JSON.parse(localStorage.getItem('gc_history') || '[]');
+
+  if (hist.length === 0) {
+    list.innerHTML = `
+      <div class="text-center py-16">
+        <p class="text-4xl mb-3">📋</p>
+        <p class="text-gray-400 text-sm">${t('noHistory')}</p>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = hist.map((item, idx) => {
+    const nameA   = item.a?.name || t('productA');
+    const nameB   = item.b?.name || t('productB');
+    const winName = item.winner === 'a' ? nameA : item.winner === 'b' ? nameB : null;
+    const label   = winName ? t('winnerLabel', { name: winName }) : t('tieLabel');
+    const emoji   = item.winner === 'tie' ? '🤝' : '🏆';
+    const date    = new Date(item.date).toLocaleDateString(locale, { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+
+    return `
+      <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-3 shadow-sm">
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <span class="text-sm font-semibold text-gray-700">${emoji} ${label}</span>
+            <p class="text-xs text-gray-400 mt-0.5">${date}</p>
+          </div>
+          <button onclick="deleteItem(${item.id})"
+            class="text-xs text-gray-300 hover:text-red-400 transition-colors font-medium px-2 py-1">
+            ${t('delete')}
+          </button>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          <div class="rounded-xl p-2.5 text-center ${item.winner === 'a' ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}">
+            <p class="text-xs font-medium text-gray-600 truncate">${nameA}</p>
+            <p class="font-bold tabular-nums ${item.winner === 'a' ? 'text-green-600' : 'text-gray-500'}">
+              ${(item.ua||0).toFixed(2)} <span class="text-xs font-normal">${t('perUnit')}</span>
+            </p>
+          </div>
+          <div class="rounded-xl p-2.5 text-center ${item.winner === 'b' ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}">
+            <p class="text-xs font-medium text-gray-600 truncate">${nameB}</p>
+            <p class="font-bold tabular-nums ${item.winner === 'b' ? 'text-green-600' : 'text-gray-500'}">
+              ${(item.ub||0).toFixed(2)} <span class="text-xs font-normal">${t('perUnit')}</span>
+            </p>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function deleteItem(id) {
+  let hist = JSON.parse(localStorage.getItem('gc_history') || '[]');
+  hist = hist.filter(h => h.id !== id);
+  localStorage.setItem('gc_history', JSON.stringify(hist));
+  renderList();
+}
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+  if (confirm('Clear all history?')) {
+    localStorage.removeItem('gc_history');
+    renderList();
+  }
+});
+
+// ── Language ──────────────────────────────────────────────────────────────────
+function applyLang() {
+  document.documentElement.lang = locale;
+  document.getElementById('lang-select').value = locale;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  renderList();
+}
+
+document.getElementById('lang-select').addEventListener('change', e => {
+  locale = e.target.value;
+  localStorage.setItem('locale', locale);
+  applyLang();
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+applyLang();
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/history", "destination": "/history.html" },
+    { "source": "/",        "destination": "/index.html"   }
+  ]
+}
