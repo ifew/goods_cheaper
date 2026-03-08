@@ -541,7 +541,7 @@ document.getElementById('reset-btn').addEventListener('click', () => {
       const el = document.getElementById(`${f === 'dval' ? 'dval' : f}-${s}`);
       if (el) el.value = '';
     });
-    setDisc(s, 'percent');
+    setDisc(s, 'flat');
   });
   render();
 });
